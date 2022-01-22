@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo"> <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""> </div>
+         
+        <div id="LoginAccount">   
+            <div class="p-2 mt-2 name"> Login </div>
+
+            <form class="p-2 mt-2" method="post" action="">
+                {% csrf_token %}
+                <div class="form-field d-flex align-items-center"> <input type="text" name="userName" id="userName" placeholder="Username"> </div>
+                <div class="form-field d-flex align-items-center"> <input type="password" name="password" id="pwd" placeholder="Password"></div> 
+                <input type="checkbox" onclick="myFunction()"><span style="padding: 15px; bottom: 5px;">Show Password</span>
+                <button type="submit" class="btn mt-3" name="Login">Login</button>
+            </form>
+        <div class="m-lg-2 fs-6"> <a href="#">Forget password?</a> or <a href="./" id="SignUp">Sign up</a> </div>
+        </div>
+        <div class="alert alert-primary" role="alert" id="message">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <div class="d-none" id="createAccount">   
+            <div class="p-1 mt-2 name"> Sign Up </div>
+
+            <form class="p-1 mt-2" method="post" action="">
+                {% csrf_token %}
+                    <div class="form-field d-flex align-items-center"> <input type="text" name="RuserName" id="RuserName" placeholder="Username"> </div> 
+                    <div class="form-field d-flex align-items-center"> <input type="email" name="REmail" id="ReMail" placeholder="Email Address"> </div>
+                    <div class="form-field d-flex align-items-center"> <input type="password" name="Rpassword" id="Rpwd" placeholder="Password"></div>
+                    <div class="form-field d-flex align-items-center"> <input type="password" name="confirmpassword" id="Crpwd" placeholder="Confirm Password"></div>  
+                <input type="checkbox" onclick="myFunction2()"><span style="padding: 15px; bottom: 5px;">Show Password</span>
+                <button type="submit" class="btn mt-3" name="SignUp">SignUp</button>
+            </form>
+        <div class="m-lg-2 fs-6">Already Have an Account | <b><a href="./" id="Login" >Login</a></b> </div>
+        </div>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("pwd");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+                }
+            function myFunction2() {
+                var x = document.getElementById("Crpwd");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+                }                
+            document.addEventListener("DOMContentLoaded",()=>{
+                const loginform = document.querySelector("#LoginAccount")
+                const Createform = document.querySelector("#createAccount")
+                const message = document.querySelector("#message")
+                document.querySelector("#SignUp").addEventListener("click",e =>{
+                    e.preventDefault();
+                    loginform.classList.add("d-none");
+                    message.classList.add("d-none");
+                    Createform.classList.remove("d-none");
+                });
+                document.querySelector("#Login").addEventListener("click",e =>{
+                    e.preventDefault();
+                    Createform.classList.add("d-none");
+                    loginform.classList.remove("d-none");
+                    
+                });
+
+            });
+        </script>
+    </div>
+</body>
+</html>

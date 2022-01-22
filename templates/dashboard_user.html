@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark bg-gradient">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0" id="Home">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-warning">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" id="Profile">
+                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline text-warning">User Profile</span> </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="About">User About</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="Resume">Resume</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="Services">Services</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="Intrest">Intrest</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="Testimonials">Testimonials</span> </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline text-warning" id="Portfolio">Portfolio</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">{{ user }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/dashboard/changepass?uname={{ user }}">Change Password...</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/dashboard/userinfo?uname={{ user }}">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/logout">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <section class="col py-3" id="first">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    {% for message in messages %}
+                    <p class="alert alert-success text-center">{{ message }}</p>
+                    {% endfor %}
+                    <a href="http://127.0.0.1:8000/dashboard/site?uname={{ user }}" class="btn btn-danger bg-gradient">Visit Site</a>
+                    <a href="http://127.0.0.1:8000/dashboard/userupdate?uname={{ user }}" class="btn btn-primary bg-gradient">Edit User</a>
+                    <button class="btn btn-dark bg-gradient" type="button">Contact Us</button>
+                  </div>
+            </section>
+            <section class="col py-3 d-none" id="second">
+                <form>
+                    <h2>Profile</h2>
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <h4 type="text" class="form-control">{{ User.user_name }}</h4>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Name</h4>
+                            <p type="text" class="form-control">{{ User.name }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Passion</h4>
+                            <p type="text" class="form-control">{{ User.passion }}</p>
+                        </div>
+                    </div>
+                    <h4 class="ml-5">Social Details</h4>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <a class="form-control" href="{{ User.facebook }}"><p class="border-top border-primary border-5"><h1 class="d-inline ps-3">F</h1>     facebook</p></a>
+                        </div>
+                        <div class="col-4">
+                            <a class="form-control" href="{{ User.instagram }}"><p class="border-top border-danger border-5"><h1 class="d-inline ps-3">I</h1>     instagram</p></a>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <a class="form-control" href="{{ User.linkidin }}"><p class="border-top border-success border-5"><h1 class="d-inline ps-3">L</h1>     linkedin</p></a>
+                        </div>
+                        <div class="col-4">
+                            <a class="form-control" href="{{ User.twitter }}"><p class="border-top border-info border-5"><h1 class="d-inline ps-3">T</h1>     twitter</p></a>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <a class="form-control" href="{{ User.skype }}"><p class="border-top border-warning border-5"><h1 class="d-inline ps-3">S</h1>     skype</p></a>
+                        </div>
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/profileupdate?uname={{ user }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="third">
+                <form>
+                    <h2>About</h2>
+                    <!--<div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                        </div>
+                    </div>
+                    </div>-->
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Job Profile</h4>
+                            <p type="text" class="form-control">{{ Userabt.job_profile }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Job Description</h4>
+                            <p type="text" class="form-control">{{ Userabt.job_desc }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Mobile Number</h4>
+                            <p type="text" class="form-control">{{ Userabt.phone }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Date Of Birth</h4>
+                            <p type="text" class="form-control">{{ Userabt.Dob }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Age</h4>
+                            <p type="text" class="form-control">{{ Userabt.age }}</p>
+                        </div>
+                        <div class="d-grid col-4">
+                            <h4>Degree</h4>
+                            {% if Userabt.degree == "1" %}
+                            <p type="text" class="form-control">Higher Education</p>
+                            {% elif Userabt.degree == "2" %}
+                            <p type="text" class="form-control">Bachelor</p>
+                            {% elif Userabt.degree == "3" %}
+                            <p type="text" class="form-control">Diploma</p>
+                            {% else %}
+                            <p type="text" class="form-control">Master</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Email Address</h4>
+                            <p type="text" class="form-control">{{ Userabt.email }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>City</h4>
+                            <p type="text" class="form-control">{{ Userabt.city }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Website</h4>
+                            <a class="form-control" href="{{ Userabt.website }}"><p class="border-top border-dark border-5"><h1 class="d-inline ps-3">W</h1>     website</p></a>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Freelancer</h4>
+                            {% if Userabt.degree == "1" %}
+                            <p type="text" class="form-control">Available</p>
+                            {% else %}
+                            <p type="text" class="form-control">Not-Available</p>
+                            {% endif %}
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <h4>About</h4>
+                            <p type="text" class="form-control">{{ Userabt.about }}</p>
+                        </div>
+                    </div>
+                    <h4 class="ml-5">Client Details</h4>
+                    <div class="row p-3">
+                        <div class="col-2">
+                            <h4>Clients</h4>
+                            <p type="text" class="form-control">{{ Userabt.clients }}</p>
+                        </div>
+                        <div class="col-2">
+                            <h4>Projects</h4>
+                            <p type="text" class="form-control">{{ Userabt.project }}</p>
+                        </div>
+                        <div class="col-2">
+                            <h4>Hours</h4>
+                            <p type="text" class="form-control">{{ Userabt.Hrs }}</p>
+                        </div>
+                        <div class="col-2">
+                            <h4>Awards</h4>
+                            <p type="text" class="form-control">{{ Userabt.Awards }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/aboutupdate?uname={{ user }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="forth">
+                <h2>Resume</h2>
+                <form action="">
+                    <!--<div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                        </div>
+                    </div>
+                    </div>-->
+                    <div class="row p-3">
+                        <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: rgb(233, 64, 64);">Skill's and Their Percentage</mark></label>
+                        {% for i,j in Dict %}
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ j }}</p>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Education</mark></label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Degree</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryeducationtitle }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Name Of Institute</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryeducationName }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <h4>Year</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryeducationYear }}</p>
+                        </div>
+                        <div class="col-6">
+                            <h4>Description</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryeducationDescription }}</p>
+                    </div>
+                    <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Education</label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Title</h4>
+                            <p type="text" class="form-control">{{ Userres.highereducationtitle }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Name of Institute</h4>
+                            <p type="text" class="form-control">{{ Userres.highereducationName }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <h4>Year</h4>
+                            <p type="text" class="form-control">{{ Userres.highereducationYear }}</p>
+                        </div>
+                        <div class="col-6">
+                            <h4>Description</h4>
+                            <p type="text" class="form-control">{{ Userres.highereducationDescription }}</p>
+                    </div>
+                    <label class="mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Job</mark></label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Work Title</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryWorktitle }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Name of Workspace</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryWorkName }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <h4>Year</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryWorkYear }}</p>
+                        </div>
+                        <div class="col-6">
+                            <h4>Description</h4>
+                            <p type="text" class="form-control">{{ Userres.primaryWorkDescription }}</p>
+                    </div>
+                    <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Job</label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Work Title</h4>
+                            <p type="text" class="form-control">{{ Userres.secondaryWorktitle }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Workspace Name</h4>
+                            <p type="text" class="form-control">{{ Userres.secondaryWorkName }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-2">
+                            <h4>Year</h4>
+                            <p type="text" class="form-control">{{ Userres.secondaryWorkYear }}</p>
+                        </div>
+                        <div class="col-6">
+                            <h4>Description</h4>
+                            <p type="text" class="form-control">{{ Userres.secondaryWorkDescription }}</p>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/resumeupdate?uname={{ user }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="fifth">
+                <h2>Services</h2>
+                <form action="" id="serfirst">
+                    <!--<div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                        </div>
+                    </div>
+                    </div>
+                    <span class="p-3"> Service Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    -->
+                    {% for i in Services %}
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <h4>Service Name</h4>
+                            <p type="text" class="form-control">{{ i.ServiceName }}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Service Icon</h4>
+                            <p type="text" class="form-control">{{ i.ServiceIcon }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <h4>Service Description</h4>
+                            <p type="text" class="form-control">{{ i.ServiceDiscription }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/serviceupdate?uname={{ user }} id={{ i.id }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/servicedel?uname={{ user }} id={{ i.id }} name={{  i.ServiceName }} "  class="btn btn-danger bg-gradient">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button href="#addservice" class="btn btn-primary" type="submit" id="AddSer">Add Service</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can View Actual Services Icon Using Its Class <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+                <form action="" method="post" id="sersecond" class="d-none">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Suname">
+                        </div>
+                    </div>
+                    </div>
+                    <span class="p-3"> Service Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Service Name" aria-label="Service Name" name="Sname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Service Icon" aria-label="Service Icon" name="Sicon">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <textarea class="form-control" placeholder="Service Description" name="Sdesc"></textarea>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Services <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="sixth">
+                <h2>Interests</h2>
+                <form action="" id="intfirst">
+                    <span class="p-3"> Intrest Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    <h4>Intrest Name and Its Icon</h4>
+                    {% for i in Intrest %}
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.intrest }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.icon }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/intrestupdate?uname={{ user }} id={{ i.id }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/intrestdel?uname={{ user }} id={{ i.id }} name={{ i.intrest }} "  class="btn btn-danger bg-gradient">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button href="#addintrest" class="btn btn-primary" type="submit" id="Addint">Add Intrest</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can View Actual Services Icon Using Its Class <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+                <form action="" method="post" id="intsecond" class="d-none">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Iuname">
+                        </div>
+                    </div>
+                    </div>
+                    <span class="p-3"> Intrest Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Intrest Name" aria-label="Intrest Name" name="Iname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Intrest Icon" aria-label="Intrest Icon" name="Iicon">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Intrests <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="seventh">
+                <h2>Testimonials</h2>
+                <section id="testfirst">
+                    {% for i in Testimonial %}
+                    <h5 class="bg-success bg-gradient m-2 p-2 text-light col-8">Client</h5>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.ClientName }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.ClientProfile }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <p type="text" class="form-control">{{ i.ClientWords }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <img class="img-thumbnail" src="{{ i.ClientImage.url }}"></img>
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/testupdate?uname={{ user }} id={{ i.id }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/testdel?uname={{ user }} id={{ i.id }} name={{ i.ClientName }}"  class="btn btn-danger bg-gradient">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button href="#addtestimonial" class="btn btn-primary" type="submit" id="Addtestimonial">Add Testimonial</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Testimonials <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </section>
+                <form enctype="multipart/form-data" action="" method="post" id="testsecond" class="d-none">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Tuname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Client Name" aria-label="Client Name" name="Tname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Client Profile" aria-label="Client Profile" name="Tprofile">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <textarea class="form-control" placeholder="Client Words" name="Tword" ></textarea>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <label for="formFile" class="form-label">Add an Image of Client</label>
+                            <input class="form-control" type="file" id="formFile" name="Timage">
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Testimonials <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="eight">
+                <h2>Portfolio Images</h2>
+                <form action="" id="portfirst">
+                    {% for i in Images %}
+                    <h5 class="bg-success bg-gradient m-2 p-2 text-light col-8">Portfolio Images</h5>
+                    <div class="row p-3">
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.Name }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p type="text" class="form-control">{{ i.Category }}</p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <img class="img-thumbnail" src="{{ i.Image.url }}"></img>
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/imgupdate?uname={{ user }} id={{ i.id }}"  class="btn btn-warning bg-gradient">Edit</a>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <a href="http://127.0.0.1:8000/dashboard/imgdel?uname={{ user }} id={{ i.id }} name={{ i.Name }}"  class="btn btn-danger bg-gradient">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit" id="Addport">Add Portfolio Image</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Portfolio Images <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+                <form enctype="multipart/form-data" action="" method="post" id="portsecond" class="d-none">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Imuname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Image Name" aria-label="Image Name" name="Imname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Image Category" aria-label="Image Category" name="Imcategory">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <label for="formFile" class="form-label">Add Your Portfolio Image</label>
+                            <input class="form-control" type="file" id="formFile" name="Imimage">
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Portfolio Images <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <script>
+                document.addEventListener("DOMContentLoaded",()=>{
+                    const home = document.querySelector("#first")
+                    const profile = document.querySelector("#second")
+                    const about = document.querySelector("#third")
+                    const resume = document.querySelector("#forth")
+                    const service = document.querySelector("#fifth")
+                    const intrest = document.querySelector("#sixth")
+                    const testimonials = document.querySelector("#seventh")
+                    const portfolio = document.querySelector("#eight")
+                    const firstser = document.querySelector("#serfirst")
+                    const secser =  document.querySelector("#sersecond")
+                    const firstint = document.querySelector("#intfirst")
+                    const secint = document.querySelector("#intsecond")
+                    const firsttest = document.querySelector("#testfirst")
+                    const sectest = document.querySelector("#testsecond")
+                    const firstport = document.querySelector("#portfirst")
+                    const secport = document.querySelector("#portsecond")
+                    document.querySelector("#Profile").addEventListener("click",e =>{
+                    e.preventDefault();
+                    profile.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                });
+                document.querySelector("#Home").addEventListener("click",e =>{
+                    e.preventDefault();
+                    home.classList.remove("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                    
+                });
+                document.querySelector("#About").addEventListener("click",e =>{
+                    e.preventDefault();
+                    about.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                });
+                document.querySelector("#Resume").addEventListener("click",e =>{
+                    e.preventDefault();
+                    resume.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+
+                });
+                document.querySelector("#Services").addEventListener("click",e =>{
+                    e.preventDefault();
+                    service.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                    document.querySelector("#AddSer").addEventListener("click",e =>{
+                        e.preventDefault();
+                        secser.classList.remove("d-none");
+                        firstser.classList.add("d-none");
+                    });
+                });
+                document.querySelector("#Intrest").addEventListener("click",e =>{
+                    e.preventDefault();
+                    intrest.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                    document.querySelector("#Addint").addEventListener("click",e =>{
+                        e.preventDefault();
+                        firstint.classList.add("d-none");
+                        secint.classList.remove("d-none");
+                    });
+                });
+                document.querySelector("#Testimonials").addEventListener("click",e =>{
+                    e.preventDefault();
+                    testimonials.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                    document.querySelector("#Addtestimonial").addEventListener("click",e =>{
+                        e.preventDefault();
+                        firsttest.classList.add("d-none");
+                        sectest.classList.remove("d-none");
+                    });
+
+                });
+                document.querySelector("#Portfolio").addEventListener("click",e =>{
+                    e.preventDefault();
+                    portfolio.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    document.querySelector("#Addport").addEventListener("click",e =>{
+                        e.preventDefault();
+                        firstport.classList.add("d-none");
+                        secport.classList.remove("d-none");
+                    });
+
+                    
+                });
+
+            });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

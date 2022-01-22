@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0" id="Home">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" id="Profile">
+                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">User Profile</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline" id="About">User About</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline" id="Resume">Resume</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline" id="Services">Services</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline" id="Intrest">Intrest</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline" id="Testimonials">Testimonials</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu7" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline" id="Portfolio">Portfolio</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">{{ user }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <section class="col py-3" id="first">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    {% for message in messages %}
+                    <p class="alert alert-danger text-center">{{ message }}</p>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="button">Contact Us</button>
+                  </div>
+            </section>
+            <section class="col py-3 d-none" id="second">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h2>Profile</h2>
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Puname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="Pname">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Passion" aria-label="Passion" name="Ppassion">
+                        </div>
+                    </div>
+                    <h4 class="ml-5">Social Details</h4>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Facebook" aria-label="Facebook" name="Pfacebook">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Instagram" aria-label="Instagram" name="Pinstagram">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Linkedin" aria-label="Linkedin" name="Plinkedin">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Twitter" aria-label="Twitter" name="Ptwitter">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Skype" aria-label="Skype" name="Pskype">
+                        </div>
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="third">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h2>About</h2>
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Auname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Job Profile" aria-label="Job Profile" name="Ajobprofile">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Job Description" aria-label="Job Description" name="Ajobdesc">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="123-45-678" aria-label="phone" name="Aphone">
+                        </div>
+                        <div class="col-4">
+                        <input type="date" class="form-control" placeholder="DOB" aria-label="DOB" name="Adob">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="number" class="form-control" placeholder="Age" aria-label="Age" name="Aage">
+                        </div>
+                        <div class="d-grid col-4">
+                            <select id="inputState" class="form-select" name="Adegree">
+                                <option>Degree</option>
+                                <option>Higher Education</option>
+                                <option>Bachelor</option>
+                                <option>Diploma</option>
+                                <option>Master</option>
+                              </select>
+                            </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="email" class="form-control" placeholder="E-Mail" aria-label="E-Mail" name="Aemail">
+                        </div>
+                        <div class="col-4">
+                        <input for="inputCity" type="text" class="form-control" placeholder="City" aria-label="City" name="Acity">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="url" class="form-control" placeholder="Website" aria-label="Website" name="Awebsite">
+                        </div>
+                        <div class="col-md-4">
+                            <select id="inputState" class="form-select" name="Afree">
+                              <option>Freelancing</option>
+                              <option>Available</option>
+                              <option>Not-Available</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <textarea class="form-control" placeholder="About" name="Aabout"></textarea>
+                        </div>
+                    </div>
+                    <h4 class="ml-5">Client Details</h4>
+                    <div class="row p-3">
+                        <div class="col-2">
+                        <input type="number" class="form-control" placeholder="Client" aria-label="Client" name="Aclient">
+                        </div>
+                        <div class="col-2">
+                        <input type="number" class="form-control" placeholder="Project" aria-label="Project" name="Aproject">
+                        </div>
+                        <div class="col-2">
+                        <input type="number" class="form-control" placeholder="Hours" aria-label="Hours" name="Ahrs">
+                        </div>
+                        <div class="col-2">
+                        <input type="number" class="form-control" placeholder="Awards" aria-label="Awards" name="Aawards">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="forth">
+                <h2>Resume</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Runame">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: rgb(233, 64, 64);">Seperate Text With Comma</mark></label>
+                        <div class="col-4">
+                        <label>Skill's (Eg : HTML,CSS,JS,PHP,Bootstrap)</label>
+                        <input type="text" class="form-control" placeholder="Skills" aria-label="Skills" name="Rskills">
+                        </div>
+                        <div class="col-4">
+                        <label>Skill Percentage (Eg : 75,80,85,90,70)</label>
+                        <input type="text" class="form-control" placeholder="Skill Percentage" aria-label="Skill Percentage" name="Rper"> 
+                        </div>
+                    </div>
+                    <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Education</mark></label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Primary Education Title" aria-label="Primary Education Title" name="Rprimaryedutitle">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Primary Education Name" aria-label="Primary Education Name" name="Rprimaryeduname">
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" name="Rprimaryeduyrs">
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control mb-2" placeholder="Description" name="Rprimaryedudesc"></textarea>
+                    </div>
+                    <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Education</label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Secondary Education Title" aria-label="Secondary Education Title" name="Rsecedutitle">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Secondary Education Name" aria-label="Secondary Education Name" name="Rseceduname">
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" name="Rseceduyrs">
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control mb-2" placeholder="Description" name="Rsecedudesc"></textarea>
+                    </div>
+                    <label class="mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Job</mark></label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Primary Job Title" aria-label="Primary Job Title" name="Rprimaryjobtitle">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Primary Job Name" aria-label="Primary Job Name" name="Rprimaryjobname">
+                        </div>
+                    </div>
+                    <div class="row p-3 mb-2">
+                        <div class="col-2">
+                            <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" name="Rprimaryjobyrs">
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control mb-2" placeholder="Description" name="Rprimaryjobdesc"></textarea>
+                    </div>
+                    <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Job</label>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Secondary Job Title" aria-label="Secondary Job Title" name="Rsecjobtitle">
+                        </div>
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Secondary Job Name" aria-label="Secondary Job Name" name="Rsecjobname">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-2">
+                            <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" name="Rsecjobyrs">
+                        </div>
+                        <div class="col-6">
+                            <textarea class="form-control" placeholder="Description" name="Rsecjobdesc"></textarea>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="fifth">
+                <h2>Services</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Suname">
+                        </div>
+                    </div>
+                    </div>
+                    <span class="p-3"> Service Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Service Name" aria-label="Service Name" name="Sname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Service Icon" aria-label="Service Icon" name="Sicon">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <textarea class="form-control" placeholder="Service Description" name="Sdesc"></textarea>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Services <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="sixth">
+                <h2>Intrest</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Iuname">
+                        </div>
+                    </div>
+                    </div>
+                    <span class="p-3"> Intrest Icon Class From Bootstrap <a href="https://icons.getbootstrap.com/" target="_blank">Get Here</a></span>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Intrest Name" aria-label="Intrest Name" name="Iname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Intrest Icon" aria-label="Intrest Icon" name="Iicon">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Intrests <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="seventh">
+                <h2>Testimonials</h2>
+                <form enctype="multipart/form-data" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Tuname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Client Name" aria-label="Client Name" name="Tname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Client Profile" aria-label="Client Profile" name="Tprofile">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8">
+                            <textarea class="form-control" placeholder="Client Words" name="Tword" ></textarea>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <label for="formFile" class="form-label">Add an Image of Client</label>
+                            <input class="form-control" type="file" id="formFile" name="Timage">
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Testimonials <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <section class="col py-3 d-none" id="eight">
+                <h2>Portfolio Images</h2>
+                <form enctype="multipart/form-data" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row p-3 mt-2">
+                    <div class="col-8">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+                        <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" name="Imuname">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Image Name" aria-label="Image Name" name="Imname">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" placeholder="Image Category" aria-label="Image Category" name="Imcategory">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-8 mb-3">
+                            <label for="formFile" class="form-label">Add Your Portfolio Image</label>
+                            <input class="form-control" type="file" id="formFile" name="Imimage">
+                          </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="d-grid gap-2 col-4">
+                            <button class="btn btn-primary" type="submit">Button</button>
+                          </div>
+                          <div class="d-grid gap-2 col-4">
+                            <span class="mt-1"> Can Add Multiple Portfolio Images <a href="https://icons.getbootstrap.com/" target="_blank">Example</a></span>
+                          </div>
+                    </div>
+                </form>
+            </section>
+            <script>
+                document.addEventListener("DOMContentLoaded",()=>{
+                    const home = document.querySelector("#first")
+                    const profile = document.querySelector("#second")
+                    const about = document.querySelector("#third")
+                    const resume = document.querySelector("#forth")
+                    const service = document.querySelector("#fifth")
+                    const intrest = document.querySelector("#sixth")
+                    const testimonials = document.querySelector("#seventh")
+                    const portfolio = document.querySelector("#eight")
+                    document.querySelector("#Profile").addEventListener("click",e =>{
+                    e.preventDefault();
+                    profile.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                });
+                document.querySelector("#Home").addEventListener("click",e =>{
+                    e.preventDefault();
+                    home.classList.remove("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                    
+                });
+                document.querySelector("#About").addEventListener("click",e =>{
+                    e.preventDefault();
+                    about.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                });
+                document.querySelector("#Resume").addEventListener("click",e =>{
+                    e.preventDefault();
+                    resume.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+
+                });
+                document.querySelector("#Services").addEventListener("click",e =>{
+                    e.preventDefault();
+                    service.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+                });
+                document.querySelector("#Intrest").addEventListener("click",e =>{
+                    e.preventDefault();
+                    intrest.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+
+                });
+                document.querySelector("#Testimonials").addEventListener("click",e =>{
+                    e.preventDefault();
+                    testimonials.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    portfolio.classList.add("d-none");
+
+                });
+                document.querySelector("#Portfolio").addEventListener("click",e =>{
+                    e.preventDefault();
+                    portfolio.classList.remove("d-none");
+                    home.classList.add("d-none");
+                    profile.classList.add("d-none");
+                    about.classList.add("d-none");
+                    resume.classList.add("d-none");
+                    service.classList.add("d-none");
+                    intrest.classList.add("d-none");
+                    testimonials.classList.add("d-none");
+                    
+                });
+
+            });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

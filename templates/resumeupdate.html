@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Service Update</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h4 class="m-2">Resume</h4>
+        <div class="row p-3 mt-2">
+        <div class="row p-3">
+            <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: rgb(233, 64, 64);">Seperate Text With Comma</mark></label>
+            <div class="col-4">
+            <label>Skill's (Eg : HTML,CSS,JS,PHP,Bootstrap)</label>
+            <input type="text" class="form-control" placeholder="Skills" aria-label="Skills" value="{{ Res.skill }}" name="Rskills">
+            </div>
+            <div class="col-4">
+            <label>Skill Percentage (Eg : 75,80,85,90,70)</label>
+            <input type="text" class="form-control" placeholder="Skill Percentage" aria-label="Skill Percentage" value="{{ Res.skillpercentage }}" name="Rper"> 
+            </div>
+        </div>
+        <label class="mb-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Education</mark></label>
+        <div class="row p-3">
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Primary Education Title" aria-label="Primary Education Title" value="{{ Res.highereducationtitle }}" name="Rprimaryedutitle">
+            </div>
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Primary Education Name" aria-label="Primary Education Name" value="{{ Res.highereducationName }}" name="Rprimaryeduname">
+            </div>
+        </div>
+        <div class="row p-3 mb-2">
+            <div class="col-2">
+                <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" value="{{ Res.highereducationYear }}" name="Rprimaryeduyrs">
+            </div>
+            <div class="col-6">
+                <textarea class="form-control mb-2" placeholder="Description" name="Rprimaryedudesc">{{ Res.highereducationDescription }}</textarea>
+        </div>
+        <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Education</label>
+        <div class="row p-3">
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Secondary Education Title" aria-label="Secondary Education Title" value="{{ Res.primaryeducationtitle }}" name="Rsecedutitle">
+            </div>
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Secondary Education Name" aria-label="Secondary Education Name" value="{{ Res.primaryeducationName }}" name="Rseceduname">
+            </div>
+        </div>
+        <div class="row p-3 mb-2">
+            <div class="col-2">
+                <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" value="{{ Res.primaryeducationYear }}" name="Rseceduyrs">
+            </div>
+            <div class="col-6">
+                <textarea class="form-control mb-2" placeholder="Description" name="Rsecedudesc">{{ Res.primaryeducationDescription }}</textarea>
+        </div>
+        <label class="mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Primary Job</mark></label>
+        <div class="row p-3">
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Primary Job Title" aria-label="Primary Job Title" value="{{ Res.primaryWorktitle }}" name="Rprimaryjobtitle">
+            </div>
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Primary Job Name" aria-label="Primary Job Name" value="{{ Res.primaryWorkName }}" name="Rprimaryjobname">
+            </div>
+        </div>
+        <div class="row p-3 mb-2">
+            <div class="col-2">
+                <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" value="{{ Res.primaryWorkYear }}" name="Rprimaryjobyrs">
+            </div>
+            <div class="col-6">
+                <textarea class="form-control mb-2" placeholder="Description" name="Rprimaryjobdesc">{{ Res.primaryWorkDescription }}</textarea>
+        </div>
+        <label class="mb-2 mt-2" style="margin-left: 25% ;"><mark style="background-color: cadetblue;">Secondary Job</label>
+        <div class="row p-3">
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Secondary Job Title" aria-label="Secondary Job Title" value="{{ Res.secondaryWorktitle }}" name="Rsecjobtitle">
+            </div>
+            <div class="col-4">
+            <input type="text" class="form-control" placeholder="Secondary Job Name" aria-label="Secondary Job Name" value="{{ Res.secondaryWorkName }}" name="Rsecjobname">
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col-2">
+                <input type="year" class="form-control" placeholder="year(2019-22)" aria-label="Year" value="{{ Res.secondaryWorkYear }}" name="Rsecjobyrs">
+            </div>
+            <div class="col-6">
+                <textarea class="form-control" placeholder="Description" name="Rsecjobdesc">{{ Res.secondaryWorkDescription }}</textarea>
+        </div>
+        <div class="row p-3">
+            <div class="d-grid gap-2 col-4">
+                <button class="btn btn-success bg-gradient" type="submit">Update</button>
+              </div>
+        </div>
+    </form>
+</body>
+</html>
