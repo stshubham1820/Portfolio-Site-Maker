@@ -50,6 +50,7 @@ def info(request):
                         try :
                             print("except")
                             user = User(username=uname,password=passw,email=Email)
+                            user.set_password(passw)
                             user.is_staff = False
                             user.is_superuser = False
                             user.save()
